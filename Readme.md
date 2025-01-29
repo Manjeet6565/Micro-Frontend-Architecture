@@ -137,6 +137,39 @@ cd ../main-app && npm run dev
 **Issue:** Micro-frontends were not loading properly with React Router.
 **Solution:** Wrapped them inside `BrowserRouter` and used `Suspense` for lazy loading.
 
+### **4. Bootstrap Import Error**
+
+**Issue:** `Failed to resolve import "bootstrap/dist/css/bootstrap.min.css"` in `chat-app/src/component/Chat.jsx`.
+**Solution:** Ensure `bootstrap` is installed in the `chat-app` by running:
+
+```bash
+npm install bootstrap --legacy-peer-deps
+```
+
+If the issue persists, try `npm install bootstrap --force`.
+
+### **5. Dependency Conflict with shared-state**
+
+**Issue:** `shared-state@0.2.3` expects **React 16**, but the project uses **React 18.3.1**, leading to an `ERESOLVE` error.
+**Solution:**
+
+- Run the following command to install dependencies while ignoring peer conflicts:
+  ```bash
+  npm install --legacy-peer-deps
+  ```
+- Alternatively, force installation with:
+  ```bash
+  npm install --force
+  ```
+- If `shared-state` is outdated, update it:
+  ```bash
+  npm install shared-state@latest
+  ```
+- Verify installed versions with:
+  ```bash
+  npm list react shared-state
+  ```
+
 ---
 
 ## Future Improvements
